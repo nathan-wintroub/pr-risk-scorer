@@ -7,7 +7,10 @@ on:
 jobs:
   analyze:
     runs-on: ubuntu-latest
-    
+    permissions:
+      pull-requests: write
+      issues: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -23,11 +26,6 @@ jobs:
         run: pip install chromadb openai PyGithub python-dotenv requests
 
       - name: Run risk analysis
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ZEABUR_API_KEY: ${{ secrets.ZEABUR_API_KEY }}
-          ZEABUR_BASE_URL: ${{ secrets.ZEABUR_BASE_URL }}
-        - name: Run risk analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ZEABUR_API_KEY: ${{ secrets.ZEABUR_API_KEY }}
