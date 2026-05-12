@@ -46,9 +46,6 @@ which code patterns lead to production incidents.** This tool closes that
 loop by building a searchable knowledge base of real incidents and 
 retrieving relevant ones at review time.
 
-This is the same approach described in Entelligence's AEI whitepaper — 
-retrieval-augmented review that cites incidents by ID, not generic rules.
-
 ---
 
 ## How It Works
