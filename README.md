@@ -116,5 +116,4 @@ incidents, citing specific past issues by number rather than generic warnings.
 
 ---
 
-*Built in 5 days as a demonstration of retrieval-augmented code review — 
-the core mechanic behind Entelligence's AEI system.*
+*Built in 2 days as a demonstration of retrieval-augmented code review —*
