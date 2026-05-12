@@ -128,7 +128,7 @@ def main():
     analysis = result["analysis"]
 	print("=== RAW AI RESPONSE ===")
 	print(analysis)
-print("=== END RAW RESPONSE ===")
+	print("=== END RAW RESPONSE ===")
 
     risk_level = extract_section(analysis, "RISK_LEVEL")
     why_risky = extract_section(analysis, "WHY_RISKY")
