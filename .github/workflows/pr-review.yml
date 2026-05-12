@@ -27,11 +27,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ZEABUR_API_KEY: ${{ secrets.ZEABUR_API_KEY }}
           ZEABUR_BASE_URL: ${{ secrets.ZEABUR_BASE_URL }}
-        - name: Run risk analysis
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ZEABUR_API_KEY: ${{ secrets.ZEABUR_API_KEY }}
-          ZEABUR_BASE_URL: ${{ secrets.ZEABUR_BASE_URL }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: python3 bot.py
