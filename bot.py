@@ -59,18 +59,18 @@ You MUST respond using EXACTLY these section headers, each on their own line:
 
 RISK_LEVEL: HIGH or MEDIUM or LOW
 
-WHY_RISKY: 2-3 sentences explaining the specific risk.
+WHY_RISKY: 1-2 sentences maximum.
 
-RECOMMENDATION: 2-3 specific actionable things the developer should do.
+RECOMMENDATION: 1-2 sentences maximum.
 
-INCIDENT_MATCH: One sentence explaining which past incident this most resembles and why.
+INCIDENT_MATCH: 1 sentence maximum.
 
 Do not use any other formatting. Do not add extra sections. Start your response with RISK_LEVEL:"""
 
     response = ai_client.chat.completions.create(
         model="gemini-2.5-flash",
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=2000
+        max_tokens=3000
     )
     return {
         "analysis": response.choices[0].message.content,
