@@ -55,20 +55,17 @@ PR DIFF:
 SIMILAR PAST INCIDENTS:
 {incidents_text}
 
-Respond in exactly this format with no deviation:
+You MUST respond using EXACTLY these section headers, each on their own line:
 
-RISK_LEVEL: [HIGH or MEDIUM or LOW]
+RISK_LEVEL: HIGH or MEDIUM or LOW
 
-WHY_RISKY:
-[2-3 sentences explaining the specific risk in this diff]
+WHY_RISKY: 2-3 sentences explaining the specific risk.
 
-RECOMMENDATION:
-[2-3 specific actionable things the developer should do]
+RECOMMENDATION: 2-3 specific actionable things the developer should do.
 
-INCIDENT_MATCH:
-[One sentence explaining which past incident this most resembles and why]
+INCIDENT_MATCH: One sentence explaining which past incident this most resembles and why.
 
-Be concise and specific. Cite incident numbers where relevant."""
+Do not use any other formatting. Do not add extra sections. Start your response with RISK_LEVEL:"""
 
     response = ai_client.chat.completions.create(
         model="gemini-2.5-flash",
