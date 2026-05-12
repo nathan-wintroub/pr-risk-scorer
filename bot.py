@@ -79,16 +79,24 @@ Do not use any other formatting. Do not add extra sections. Start your response 
 
 def extract_section(text, section):
     try:
-        start = text.index(section + ":") + len(section) + 1
-        next_sections = ["RISK_LEVEL", "WHY_RISKY", "RECOMMENDATION", "INCIDENT_MATCH"]
-        end = len(text)
-        for s in next_sections:
-            if s + ":" in text[start:]:
-                candidate = text.index(s + ":", start)
-                if candidate < end:
-                    end = candidate
-        return text[start:end].strip()
-    except ValueError:
+        lines = text.split('\n')
+        collecting = False
+        result = []
+        for line in lines:
+            if line.strip().startswith(section + ":"):
+                collecting = True
+                # Get any text on the same line as the header
+                inline = line.strip()[len(section)+1:].strip()
+                if inline:
+                    result.append(inline)
+                continue
+            if collecting:
+                # Stop if we hit another section header
+                if any(line.strip().startswith(s + ":") for s in ["RISK_LEVEL", "WHY_RISKY", "RECOMMENDATION", "INCIDENT_MATCH"]):
+                    break
+                result.append(line)
+        return '\n'.join(result).strip() or "N/A"
+    except Exception:
         return "N/A"
 
 def main():
