@@ -55,63 +55,9 @@ PR DIFF:
 SIMILAR PAST INCIDENTS:
 {incidents_text}
 
-Based on the diff and the similar incidents, provide:
-1. A risk score: LOW, MEDIUM, or HIGH
-2. Which past incident this most resembles and why
-3. A specific recommendation to make this code safer
+Respond in exactly this format with no deviation:
 
-Be concise. Cite incidents by their issue number."""
+RISK_LEVEL: [HIGH or MEDIUM or LOW]
 
-    response = ai_client.chat.completions.create(
-        model="gemini-2.5-flash",
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=2000
-    )
-    return {
-        "analysis": response.choices[0].message.content,
-        "incidents": incidents
-    }
-
-def main():
-    # Get PR details from environment (GitHub Actions sets these)
-    repo_name = os.getenv("GITHUB_REPOSITORY")
-    pr_number = int(os.getenv("PR_NUMBER", 0))
-    
-    if not repo_name or not pr_number:
-        print("Not running in GitHub Actions context")
-        return
-
-    repo = g.get_repo(repo_name)
-    pr = repo.get_pull(pr_number)
-    
-    # Get the diff
-    diff_text = ""
-    for file in pr.get_files():
-        diff_text += f"File: {file.filename}\n"
-        if file.patch:
-            diff_text += file.patch + "\n\n"
-    
-    if not diff_text:
-        print("No diff found")
-        return
-
-    print(f"Analyzing PR #{pr_number}...")
-    result = score_pr_risk(diff_text)
-    
-    # Post comment on the PR
-    comment = f"""## 🤖 PR Risk Analysis
-
-{result['analysis']}
-
----
-**Similar Past Incidents:**
-"""
-    for incident in result["incidents"]:
-        meta = incident["metadata"]
-        comment += f"- Issue #{meta['issue_number']}: [{meta['title']}]({meta['url']})\n"
-
-    pr.create_issue_comment(comment)
-    print("Comment posted!")
-
-if __name__ == "__main__":
-    main()
+WHY_RISKY:
+[2-3 sentences explaining the specifi
